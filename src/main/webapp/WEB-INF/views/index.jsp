@@ -13,6 +13,8 @@ Enter Salary :<input type="text" id="sal"><br><br>
 <input type="submit" value="Add Emp" onclick="save()">
 <br><br>
 <input type="button" value="display emp" onclick="display()">
+
+<div id="tb"></div>
 <!--js  -->
 <script type="text/javascript">
 
@@ -54,10 +56,65 @@ function save()
 	 	.then((r)=>{
 	 		alert(r);
 	 	});
-	 	eid.innerText="";
- 		ename.innerText="";
- 		sal.innerText="";
+	
 }
+
+function display() {
+    fetch("display")
+        .then((res) => res.json())
+        .then((data) => {
+
+            let tb = document.getElementById("tb");
+            tb.innerHTML = "";   // old data clear
+
+            // ----- Create table head -----
+            let thead = document.createElement("thead");
+            let tr = document.createElement("tr");
+
+            let tid = document.createElement("th");
+            tid.innerText = "Eid";
+
+            let tn = document.createElement("th");
+            tn.innerText = "Emp Name";
+
+            let ts = document.createElement("th");
+            ts.innerText = "Emp Salary";
+
+            tr.appendChild(tid);
+            tr.appendChild(tn);
+            tr.appendChild(ts);
+            thead.appendChild(tr);
+            tb.appendChild(thead);
+
+            // ----- Create table body -----
+            let tbody = document.createElement("tbody");
+
+            data.forEach((ele) => {
+                let tr = document.createElement("tr");
+
+                let td1 = document.createElement("td");
+                td1.innerText = ele.eid;
+
+                let td2 = document.createElement("td");
+                td2.innerText = ele.ename;
+
+                let td3 = document.createElement("td");
+                td3.innerText = ele.sal;
+
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+                tr.appendChild(td3);
+
+                tbody.appendChild(tr);
+            });
+
+            tb.appendChild(tbody);
+        })
+        .catch((err) => {
+            console.log("Error:", err);
+        });
+}
+
 </script>
 </body>
 </html>

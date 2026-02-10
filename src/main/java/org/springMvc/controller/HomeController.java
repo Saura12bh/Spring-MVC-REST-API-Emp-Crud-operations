@@ -1,9 +1,12 @@
 package org.springMvc.controller;
 
+import java.util.List;
+
 import org.springMvc.model.Emp;
 import org.springMvc.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,5 +49,13 @@ public class HomeController {
 	{
 		empService.saveEmp(e);
 		return "Emp save Successfully";
+	}
+	
+	@ResponseBody
+	@GetMapping("/display")
+	public List<Emp> display()
+	{
+		List<Emp>list=empService.display();
+		return list;
 	}
 }

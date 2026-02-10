@@ -1,5 +1,7 @@
 package org.springMvc.service;
 
+import java.util.List;
+
 import org.springMvc.model.Emp;
 import org.springMvc.repo.EmpRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,10 @@ public class EmpServiceImpl implements EmpService{
 	@Override
 	public void saveEmp(Emp e) {
 		empRepo.saveEmp(e);
+	}
+	@Override
+	public List<Emp> display() {
+		return empRepo.display();
 	}
 
 }
