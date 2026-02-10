@@ -1,26 +1,26 @@
 package org.springMvc.model;
 
 public class Emp {
-	private int id;
-	private String name;
-	private int salary;
-	public int getId() {
-		return id;
+	private int eid;
+	private String ename;
+	private int sal;
+	public int getEid() {
+		return eid;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setEid(int eid) {
+		this.eid = eid;
 	}
-	public String getName() {
-		return name;
+	public String getEname() {
+		return ename;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setEname(String ename) {
+		this.ename = ename;
 	}
-	public int getSalary() {
-		return salary;
+	public int getSal() {
+		return sal;
 	}
-	public void setSalary(int salary) {
-		this.salary = salary;
+	public void setSal(int sal) {
+		this.sal = sal;
 	}
 
 }

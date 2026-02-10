@@ -7,21 +7,56 @@
 <title>Insert title here</title>
 </head>
 <body>
-Enter Name :<input type="text" id="name"><br><br>
-Enter Salary :<input type="text" id="salary"><br><br>
+Enter Id :<input type="text" id="eid"><br><br>
+Enter Name :<input type="text" id="ename"><br><br>
+Enter Salary :<input type="text" id="sal"><br><br>
 <input type="submit" value="Add Emp" onclick="save()">
-
-
+<br><br>
+<input type="button" value="display emp" onclick="display()">
 <!--js  -->
 <script type="text/javascript">
 
 function save()
-{
-	let name=document.getElementById("name").value;
-	let salary=document.getElementById("salary").value;
- 	fetch("save?name="+name+"$salary="+salary)
- 	.then()
- 	.then();
+{	/* fetch value from page */
+	let eid=document.getElementById("eid").value;
+	let ename=document.getElementById("ename").value;
+	let sal=document.getElementById("sal").value;
+	
+	/* Query String  backend la mg requestParam use krayla lagt */
+	/* let data="eid="+eid+"&ename="+ename+"&sal="+sal;
+	 */
+		/* jr json madhe data send kraycha asel tr */
+	 	let emp={
+			 eid:eid,
+			ename:ename,	 		
+	 		sal:sal,
+	 }	
+	/* 	
+	jr  normal query string  ni data send kraycha asel tr
+ 	fetch("save",
+ 			{method:"POST" 
+ 			,headers: {
+ 	            "Content-Type": "application/x-www-form-urlencoded"
+ 	        },
+ 	        body:data})
+ 	.then((res)=>res.text())
+ 	.then((r)=>{
+ 		alert(r);
+ 	}); */
+		/* json ni data send kraycha asel tr */
+	 	fetch("save",
+	 			{method:"POST" 
+	 			,headers: {
+	 	            "Content-Type": "application/json"
+	 	        },
+	 	        body:JSON.stringify(emp)})
+	 	.then((res)=>res.text())
+	 	.then((r)=>{
+	 		alert(r);
+	 	});
+	 	eid.innerText="";
+ 		ename.innerText="";
+ 		sal.innerText="";
 }
 </script>
 </body>
