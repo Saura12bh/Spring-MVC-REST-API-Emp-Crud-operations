@@ -50,12 +50,20 @@ public class HomeController {
 		empService.saveEmp(e);
 		return "Emp save Successfully";
 	}
-	
+	//fetch data
 	@ResponseBody
 	@GetMapping("/display")
 	public List<Emp> display()
 	{
 		List<Emp>list=empService.display();
+		return list;
+	}
+	//search by id
+	@ResponseBody
+	@GetMapping("/search")
+	public List<Emp> search(@RequestParam("eid") Integer eid)
+	{
+		List<Emp>list=empService.search(eid);
 		return list;
 	}
 }

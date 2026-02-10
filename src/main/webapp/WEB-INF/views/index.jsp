@@ -15,6 +15,14 @@ Enter Salary :<input type="text" id="sal"><br><br>
 <input type="button" value="display emp" onclick="display()">
 
 <div id="tb"></div>
+
+<br><br>
+Enter Id :<input type="text" id="id"><br><br>
+<input type="button" value="Search emp" onclick="search()">
+<br><br>
+<div id="tb1"></div>
+
+
 <!--js  -->
 <script type="text/javascript">
 
@@ -109,6 +117,62 @@ function display() {
             });
 
             tb.appendChild(tbody);
+        })
+        .catch((err) => {
+            console.log("Error:", err);
+        });
+}
+function search() {
+	let eid=document.getElementById("id").value;
+    fetch("search?eid="+eid)
+        .then((res) => res.json())
+        .then((data) => {
+
+            let tb1 = document.getElementById("tb1");
+            tb1.innerHTML = "";   // old data clear
+
+            // ----- Create table head -----
+            let thead = document.createElement("thead");
+            let tr = document.createElement("tr");
+
+            let tid = document.createElement("th");
+            tid.innerText = "Eid";
+
+            let tn = document.createElement("th");
+            tn.innerText = "Emp Name";
+
+            let ts = document.createElement("th");
+            ts.innerText = "Emp Salary";
+
+            tr.appendChild(tid);
+            tr.appendChild(tn);
+            tr.appendChild(ts);
+            thead.appendChild(tr);
+            tb1.appendChild(thead);
+
+            // ----- Create table body -----
+            let tbody = document.createElement("tbody");
+
+            data.forEach((ele) => {
+                let tr = document.createElement("tr");
+
+                let td1 = document.createElement("td");
+                td1.innerText = ele.eid;
+
+                let td2 = document.createElement("td");
+                td2.innerText = ele.ename;
+
+                let td3 = document.createElement("td");
+                td3.innerText = ele.sal;
+
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+                tr.appendChild(td3);
+
+                tbody.appendChild(tr);
+            });
+
+            tb1.appendChild(tbody);
         })
         .catch((err) => {
             console.log("Error:", err);

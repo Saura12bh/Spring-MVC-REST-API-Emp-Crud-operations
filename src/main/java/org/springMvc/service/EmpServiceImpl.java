@@ -19,5 +19,10 @@ public class EmpServiceImpl implements EmpService{
 	public List<Emp> display() {
 		return empRepo.display();
 	}
+	@Override
+	public List<Emp> search(int eid) {
+		// TODO Auto-generated method stub
+		return empRepo.search(eid);
+	}
 
 }

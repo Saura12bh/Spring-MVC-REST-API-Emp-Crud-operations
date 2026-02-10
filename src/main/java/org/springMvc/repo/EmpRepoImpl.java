@@ -37,4 +37,20 @@ public class EmpRepoImpl implements EmpRepo {
 		return list;
 	}
 
+	@Override
+	public List<Emp> search(int eid) {
+		List<Emp>list=jdbcTemplate.query("select * from emp where eid=?",new RowMapper<Emp>() {
+
+			@Override
+			public Emp mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Emp e=new Emp();
+				e.setEid(rs.getInt(1));
+				e.setEname(rs.getString(2));
+				e.setSal(rs.getInt(3));
+				return e;
+			}
+		},eid);
+		return list;
+	}
+
 }
