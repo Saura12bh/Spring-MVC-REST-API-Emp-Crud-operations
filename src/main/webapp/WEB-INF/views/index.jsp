@@ -80,7 +80,12 @@ function save()
 
 function display() {
     fetch("display")
-        .then((res) => res.json())
+       .then(res=>{
+   if(!res.ok){
+      return res.json().then(err=>{ throw err; });
+   }
+   return res.json();
+})
         .then((data) => {
 
             let tb = document.getElementById("tb");
@@ -130,7 +135,7 @@ function display() {
             tb.appendChild(tbody);
         })
         .catch((err) => {
-            console.log("Error:", err);
+          alert(err.message)
         });
 }
 function search() {
@@ -212,7 +217,7 @@ function update()
 		alert(data);
 	}).
 	catch((err)=>{
-		alert(err);
+		alert(err.message);
 	});
 }
 function del()
@@ -222,12 +227,20 @@ function del()
 			{
 			method:"DELETE"
 			}).
-	then((res)=>res.text()).
+	then((res)=>{
+		if(!res.ok)
+			{
+			return res.json().then((err)=>{
+				throw err;
+			});
+			}
+		return res.text();
+	}).
 	then((data)=>{
 		alert(data);
 	}).
 	catch((err)=>{
-		alert(err);
+		alert(err.message);
 	});
 }
 </script>
