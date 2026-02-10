@@ -24,5 +24,13 @@ public class EmpServiceImpl implements EmpService{
 		// TODO Auto-generated method stub
 		return empRepo.search(eid);
 	}
+	@Override
+	public void delete(int eid) {
+		empRepo.delete(eid);
+	}
+	@Override
+	public void update(Emp e) {
+		empRepo.update(e);
+	}
 
 }

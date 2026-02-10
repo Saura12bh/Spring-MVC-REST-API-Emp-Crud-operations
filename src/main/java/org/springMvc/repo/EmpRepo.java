@@ -9,4 +9,6 @@ public interface EmpRepo {
 	public void saveEmp(Emp e);
 	public List<Emp> display();
 	public List<Emp> search(int eid);
+	public void update(Emp e);
+	public void delete(int eid);
 }

@@ -22,8 +22,19 @@ Enter Id :<input type="text" id="id"><br><br>
 <br><br>
 <div id="tb1"></div>
 
+<!-- update emp data -->
+Enter  Id :<input type="text" id="neid"><br><br>
+Enter new Name :<input type="text" id="nename"><br><br>
+Enter new  Salary :<input type="text" id="nsal"><br><br>
+<button onclick="update()">Update</button>
 
+<br><br>
+
+<!-- Delete emp using id  -->
 <!--js  -->
+Enter Id to delete emp:<input type="text" id="did"><br><br>
+<input type="button" value="delete emp" onclick="del()">
+<br><br>
 <script type="text/javascript">
 
 function save()
@@ -178,7 +189,47 @@ function search() {
             console.log("Error:", err);
         });
 }
-
+//update emp using id
+function update()
+{
+	let emp={
+	 eid:document.getElementById("neid").value,
+	 ename:document.getElementById("nename").value,
+	 sal:document.getElementById("nsal").value,
+	};
+	
+	fetch("update",
+			{
+		   method: "PUT",
+		   headers: {
+		     "Content-Type": "application/json"
+		   },
+		   body: JSON.stringify(emp)
+			}
+	).
+	then((res)=>res.text()).
+	then((data)=>{
+		alert(data);
+	}).
+	catch((err)=>{
+		alert(err);
+	});
+}
+function del()
+{
+	let eid=document.getElementById("did").value;
+	fetch("delete?eid="+eid,
+			{
+			method:"DELETE"
+			}).
+	then((res)=>res.text()).
+	then((data)=>{
+		alert(data);
+	}).
+	catch((err)=>{
+		alert(err);
+	});
+}
 </script>
 </body>
 </html>

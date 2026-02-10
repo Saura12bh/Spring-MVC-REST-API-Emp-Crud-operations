@@ -12,22 +12,22 @@ import org.springframework.stereotype.Repository;
 
 @Repository("empRepo")
 public class EmpRepoImpl implements EmpRepo {
-	
+
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
 	@Override
 	public void saveEmp(Emp e) {
-		jdbcTemplate.update("insert into emp values(?,?,?)",e.getEid(),e.getEname(),e.getSal());
+		jdbcTemplate.update("insert into emp values(?,?,?)", e.getEid(), e.getEname(), e.getSal());
 	}
 
 	@Override
 	public List<Emp> display() {
-		List<Emp>list=jdbcTemplate.query("select * from emp",new RowMapper<Emp>() {
+		List<Emp> list = jdbcTemplate.query("select * from emp", new RowMapper<Emp>() {
 
 			@Override
 			public Emp mapRow(ResultSet rs, int rowNum) throws SQLException {
-				Emp e=new Emp();
+				Emp e = new Emp();
 				e.setEid(rs.getInt(1));
 				e.setEname(rs.getString(2));
 				e.setSal(rs.getInt(3));
@@ -39,18 +39,27 @@ public class EmpRepoImpl implements EmpRepo {
 
 	@Override
 	public List<Emp> search(int eid) {
-		List<Emp>list=jdbcTemplate.query("select * from emp where eid=?",new RowMapper<Emp>() {
+		List<Emp> list = jdbcTemplate.query("select * from emp where eid=?", new RowMapper<Emp>() {
 
 			@Override
 			public Emp mapRow(ResultSet rs, int rowNum) throws SQLException {
-				Emp e=new Emp();
+				Emp e = new Emp();
 				e.setEid(rs.getInt(1));
 				e.setEname(rs.getString(2));
 				e.setSal(rs.getInt(3));
 				return e;
 			}
-		},eid);
+		}, eid);
 		return list;
+	}
+
+	@Override
+	public void update(Emp e) {
+		jdbcTemplate.update("update emp set ename=?,sal=? where eid=?", e.getEname(), e.getSal(), e.getEid());
+	}
+
+	public void delete(int eid) {
+	jdbcTemplate.update("delete from emp where eid=?",eid);
 	}
 
 }

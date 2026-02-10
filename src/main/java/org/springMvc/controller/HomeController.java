@@ -6,8 +6,10 @@ import org.springMvc.model.Emp;
 import org.springMvc.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -66,4 +68,23 @@ public class HomeController {
 		List<Emp>list=empService.search(eid);
 		return list;
 	}
+	
+	//update by id
+	@ResponseBody
+	@PutMapping("/update")
+	public String update(@RequestBody Emp e)
+	{
+		empService.update(e);
+		return "update successfully";
+	}
+
+	//delete 
+	@ResponseBody
+	@DeleteMapping("/delete")
+	public String delete(@RequestParam("eid") int eid)
+	{
+		empService.delete(eid);
+		return "emp delete successfully";
+	}
 }
+
