@@ -42,6 +42,7 @@ public class EmpServiceImpl implements EmpService{
 		}
 		empRepo.delete(eid);
 	}
+	
 	@Override
 	public void update(Emp e) {
 		List<Emp>list=empRepo.search(e.getEid());

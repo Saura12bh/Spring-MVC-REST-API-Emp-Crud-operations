@@ -16,7 +16,8 @@ public class GlobalExceptionHandler {
 		ErrorRes er=new ErrorRes(404, ex.getMessage());
 		return new ResponseEntity<>(er,HttpStatus.NOT_FOUND);	
 	}
-	 @ExceptionHandler(Exception.class)
+	
+		@ExceptionHandler(Exception.class)
 	    @ResponseBody
 	    public ResponseEntity<ErrorRes> handleAll(Exception ex) {
 
